@@ -1,0 +1,6 @@
+-r requirements.txt
+
+# Development tools
+ipython==8.18.1
+jupyter==1.0.0
+watchdog==3.0.0
