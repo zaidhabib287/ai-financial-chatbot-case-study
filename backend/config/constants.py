@@ -1,9 +1,11 @@
 from enum import Enum
 
+
 class UserRole(str, Enum):
     CUSTOMER = "customer"
     ADMIN = "admin"
     SYSTEM = "system"
+
 
 class TransactionStatus(str, Enum):
     PENDING = "pending"
@@ -11,10 +13,12 @@ class TransactionStatus(str, Enum):
     FAILED = "failed"
     REJECTED = "rejected"
 
+
 class TransactionType(str, Enum):
     TRANSFER = "transfer"
     CREDIT = "credit"
     DEBIT = "debit"
+
 
 class DocumentType(str, Enum):
     SANCTIONS_LIST = "sanctions_list"
@@ -22,22 +26,17 @@ class DocumentType(str, Enum):
     TERMS_CONDITIONS = "terms_conditions"
     OTHER = "other"
 
+
 # Blacklisted countries (example)
-BLACKLISTED_COUNTRIES = [
-    "North Korea",
-    "Iran",
-    "Syria",
-    "Cuba",
-    "Crimea Region"
-]
+BLACKLISTED_COUNTRIES = ["North Korea", "Iran", "Syria", "Cuba", "Crimea Region"]
 
 # Supported file extensions
-SUPPORTED_DOCUMENT_EXTENSIONS = ['.pdf', '.docx', '.txt']
+SUPPORTED_DOCUMENT_EXTENSIONS = [".pdf", ".docx", ".txt"]
 
 # Chat intents
 CHAT_INTENTS = {
     "add_beneficiary": ["add beneficiary", "new beneficiary", "register beneficiary"],
     "transfer_funds": ["transfer", "send money", "make payment"],
     "check_balance": ["balance", "how much", "account balance"],
-    "transaction_history": ["history", "past transactions", "transaction list"]
+    "transaction_history": ["history", "past transactions", "transaction list"],
 }
