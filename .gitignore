@@ -44,7 +44,6 @@ secrets/
 config/secrets.yaml
 
 # Docker
-.dockerignore
 docker-compose.override.yml
 
 # Node modules (for frontend)
