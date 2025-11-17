@@ -1,9 +1,12 @@
+import asyncio
 from typing import Dict
-from backend.utils.mock_apis import mock_banking_api
+
+from sqlalchemy.future import select
+
 from backend.models.database import get_db
 from backend.models.models import Beneficiary, Transaction, User
-from sqlalchemy.future import select
-import asyncio
+from backend.utils.mock_apis import mock_banking_api
+
 
 class ChatContextManager:
     """Interface between chatbot and backend logic."""

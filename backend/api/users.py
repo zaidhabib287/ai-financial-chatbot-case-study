@@ -9,7 +9,9 @@ from sqlalchemy.future import select
 from backend.auth.dependencies import get_admin_user, get_current_active_user
 from backend.models.database import get_db
 from backend.models.models import Transaction, User
-from backend.models.schemas import BalanceResponse, User as UserSchema, UserUpdate
+from backend.models.schemas import BalanceResponse
+from backend.models.schemas import User as UserSchema
+from backend.models.schemas import UserUpdate
 
 router = APIRouter()
 
@@ -44,8 +46,7 @@ async def get_balance(
     # Calculate today's spending
     today = func.date(func.now())
     result = await db.execute(
-        select(func.sum(Transaction.amount))
-        .filter(
+        select(func.sum(Transaction.amount)).filter(
             Transaction.sender_id == current_user.id,
             func.date(Transaction.created_at) == today,
             Transaction.status == "completed",

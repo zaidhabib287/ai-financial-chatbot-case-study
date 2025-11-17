@@ -1,28 +1,27 @@
 
     Financial Compliance Rules and Regulations
-    
+
     1. Daily Transfer Limits
     The maximum daily transfer limit for individual customers is 1000 BHD (Bahraini Dinars).
     Corporate accounts may have a daily limit of up to 50000 BHD.
-    
+
     2. Per-Transaction Limits
     Individual transactions are limited to 500 BHD per transaction.
     Transactions exceeding this amount require additional verification.
-    
+
     3. Sanctioned Countries
     The following countries are currently under sanctions and transfers are prohibited:
     - North Korea
     - Iran
     - Syria
     - Cuba
-    
+
     4. Prohibited Entities
     The following entities are sanctioned and no transactions should be processed:
     - ABC Trading Company
     - XYZ International Holdings
     - Test Sanctioned Person
-    
+
     5. Compliance Requirements
     All transactions must be screened against the current sanctions list.
     Customer due diligence must be performed for transactions over 100 BHD.
-    

@@ -1,5 +1,5 @@
-import streamlit as st
 import requests
+import streamlit as st
 
 API_URL = "http://localhost:8000/api/v1/chatbot/chat"
 st.title("💬 AI Financial Assistant")

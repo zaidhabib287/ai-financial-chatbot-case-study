@@ -1,4 +1,5 @@
 import os
+
 import requests
 import streamlit as st
 
@@ -9,7 +10,11 @@ st.set_page_config(page_title="Admin Portal", layout="wide")
 st.title("🔐 Admin Portal – Financial Chatbot")
 
 st.sidebar.header("Authentication")
-token = st.sidebar.text_input("Bearer Token", type="password", help="Use /auth/login to get a token for an admin user")
+token = st.sidebar.text_input(
+    "Bearer Token",
+    type="password",
+    help="Use /auth/login to get a token for an admin user",
+)
 if token:
     AUTH_HEADER = {"Authorization": f"Bearer {token}"}
 
@@ -19,12 +24,19 @@ tab_docs, tab_rag, tab_users, tab_tx, tab_bens = st.tabs(
 
 with tab_docs:
     st.subheader("Upload & Ingest Documents")
-    dtype = st.selectbox("Document Type", ["sanctions_list", "compliance_rules", "terms_conditions", "other"])
-    file = st.file_uploader("Upload file (.pdf, .docx, .txt)", type=["pdf", "docx", "txt"])
+    dtype = st.selectbox(
+        "Document Type",
+        ["sanctions_list", "compliance_rules", "terms_conditions", "other"],
+    )
+    file = st.file_uploader(
+        "Upload file (.pdf, .docx, .txt)", type=["pdf", "docx", "txt"]
+    )
     if st.button("Upload", disabled=not file):
         files = {"file": (file.name, file.read())}
         data = {"document_type": dtype}
-        r = requests.post(f"{API_BASE}/documents/upload", files=files, data=data, headers=AUTH_HEADER)
+        r = requests.post(
+            f"{API_BASE}/documents/upload", files=files, data=data, headers=AUTH_HEADER
+        )
         st.write(r.json())
 
     st.divider()
@@ -47,7 +59,9 @@ with tab_rag:
 
     del_id = st.text_input("Delete vectors by source (document_id)")
     if st.button("Delete by Source", disabled=not del_id):
-        r = requests.delete(f"{API_BASE}/documents/rag/delete-by-source/{del_id}", headers=AUTH_HEADER)
+        r = requests.delete(
+            f"{API_BASE}/documents/rag/delete-by-source/{del_id}", headers=AUTH_HEADER
+        )
         st.json(r.json())
 
 with tab_users:
@@ -62,7 +76,9 @@ with tab_users:
     amt = st.number_input("Amount", min_value=0.0, step=10.0)
     if st.button("Submit Operation", disabled=not uid or amt <= 0):
         payload = {"user_id": uid, "amount": float(amt), "operation_type": op_type}
-        r = requests.post(f"{API_BASE}/admin/users/credit-debit", json=payload, headers=AUTH_HEADER)
+        r = requests.post(
+            f"{API_BASE}/admin/users/credit-debit", json=payload, headers=AUTH_HEADER
+        )
         st.json(r.json())
 
 with tab_tx:

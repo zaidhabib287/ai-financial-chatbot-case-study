@@ -9,11 +9,8 @@ from sqlalchemy.future import select
 from backend.auth.dependencies import get_current_user
 from backend.models.database import get_db
 from backend.models.models import Beneficiary as BeneficiaryModel
-from backend.models.schemas import (
-    BeneficiaryCreate,
-    BeneficiaryUpdate,
-    Beneficiary as BeneficiarySchema,
-)
+from backend.models.schemas import Beneficiary as BeneficiarySchema
+from backend.models.schemas import BeneficiaryCreate, BeneficiaryUpdate
 
 router = APIRouter()
 

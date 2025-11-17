@@ -8,6 +8,7 @@ from pathlib import Path
 
 import httpx
 import pytest
+
 pytestmark = pytest.mark.skip("Phase 2 manual test script - skipped in automated tests")
 
 # Add project root to path
@@ -30,7 +31,9 @@ async def test_auth_flow():
         }
 
         try:
-            response = await client.post(f"{BASE_URL}/auth/register", json=register_data)
+            response = await client.post(
+                f"{BASE_URL}/auth/register", json=register_data
+            )
             if response.status_code == 200:
                 print("✓ User registration successful")
                 user = response.json()

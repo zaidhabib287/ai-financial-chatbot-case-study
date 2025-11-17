@@ -1,6 +1,7 @@
-import os
 import asyncio
+import os
 import shutil
+
 import pytest
 from httpx import AsyncClient
 
@@ -16,6 +17,7 @@ if os.path.exists("./data/vectordb_test"):
 os.makedirs("./data/vectordb_test", exist_ok=True)
 
 from backend.config.settings import settings  # now instantiated
+
 settings.environment = "test"
 settings.database_url = "sqlite:///./test.db"
 settings.upload_dir = "./data/uploads_test"
@@ -24,13 +26,15 @@ settings.mock_api_delay = 0
 settings.mock_api_failure_rate = 0
 
 from backend.main import app
-from backend.models.database import engine, Base
+from backend.models.database import Base, engine
+
 
 @pytest.fixture(scope="session")
 def event_loop():
     loop = asyncio.new_event_loop()
     yield loop
     loop.close()
+
 
 @pytest.fixture(scope="session", autouse=True)
 async def _db_setup():
@@ -40,6 +44,7 @@ async def _db_setup():
         await conn.run_sync(Base.metadata.create_all)
     yield
     await engine.dispose()
+
 
 @pytest.fixture
 async def client():

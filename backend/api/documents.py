@@ -1,13 +1,13 @@
 import os
-from uuid import uuid4
 from datetime import datetime
+from uuid import uuid4
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
 from backend.auth.dependencies import get_admin_user
-from backend.config.constants import DocumentType, SUPPORTED_DOCUMENT_EXTENSIONS
+from backend.config.constants import SUPPORTED_DOCUMENT_EXTENSIONS, DocumentType
 from backend.config.settings import settings
 from backend.models.database import get_db
 from backend.models.models import Document, User

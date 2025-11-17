@@ -5,7 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from backend.api import admin, auth, beneficiaries, mock, transactions, users, chatbot
+from backend.api import admin, auth, beneficiaries, chatbot, mock, transactions, users
 from backend.config.logger import logger
 from backend.config.settings import settings
 from backend.models.database import Base, engine

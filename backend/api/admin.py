@@ -1,5 +1,5 @@
-import os
 import asyncio
+import os
 from datetime import datetime
 from typing import List
 from uuid import UUID, uuid4
@@ -9,33 +9,33 @@ from fastapi import (
     BackgroundTasks,
     Depends,
     File,
+    Form,
     HTTPException,
     UploadFile,
     status,
-    Form,
 )
+from sqlalchemy import func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy import func
 
 from backend.auth.dependencies import get_admin_user
+from backend.config.constants import DocumentType  # <-- use the enum
 from backend.config.constants import (
     SUPPORTED_DOCUMENT_EXTENSIONS,
     TransactionStatus,
     TransactionType,
-    DocumentType,  # <-- use the enum
 )
 from backend.config.settings import settings
 from backend.models.database import get_db
 from backend.models.models import Document, Transaction, User
-from backend.models.schemas import (
-    AccountOperation,
-    Document as DocumentSchema,
-    MockApiResponse,
-    User as UserSchema,
+from backend.models.schemas import AccountOperation
+from backend.models.schemas import Document as DocumentSchema
+from backend.models.schemas import MockApiResponse
+from backend.models.schemas import User as UserSchema
+from backend.rag.rag_manager import (  # Phase-3 RAG manager (vector_store lives here)
+    rag_manager,
 )
 from backend.utils.mock_apis import generate_reference_number
-from backend.rag.rag_manager import rag_manager  # Phase-3 RAG manager (vector_store lives here)
 
 router = APIRouter()
 
@@ -45,13 +45,20 @@ def _dispatch_rag_processing(file_path: str, document_id: str, document_type: st
     """
     Sync wrapper for background task that schedules the async RAG processing.
     """
+
     async def _run():
         # document_type here is a string; RAGManager expects a string too per Phase-3
-        result = await rag_manager.process_document(file_path, document_id, document_type)  # :contentReference[oaicite:2]{index=2}
+        result = await rag_manager.process_document(
+            file_path, document_id, document_type
+        )  # :contentReference[oaicite:2]{index=2}
         if result.get("success"):
-            print(f"[RAG] Document {document_id} processed: {result['processing_stats']}")
+            print(
+                f"[RAG] Document {document_id} processed: {result['processing_stats']}"
+            )
         else:
-            print(f"[RAG] Document {document_id} processing failed: {result.get('error')}")
+            print(
+                f"[RAG] Document {document_id} processing failed: {result.get('error')}"
+            )
 
     # Schedule the coroutine on the event loop after response is sent
     try:
@@ -124,7 +131,9 @@ async def upload_document(
         )
     else:
         # Fallback: process inline (await). Comment out if you prefer only background.
-        await rag_manager.process_document(file_path, str(document_uuid), document_type.value)
+        await rag_manager.process_document(
+            file_path, str(document_uuid), document_type.value
+        )
 
     return document
 

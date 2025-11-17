@@ -1,14 +1,17 @@
 import asyncio
+
 from sqlalchemy.future import select
-from backend.models.database import async_session_maker
-from backend.models.models import User
+
 from backend.auth.security import get_password_hash
 from backend.config.constants import UserRole
+from backend.models.database import async_session_maker
+from backend.models.models import User
+
 
 async def main():
     async with async_session_maker() as db:
         # admin
-        result = await db.execute(select(User).filter(User.username=="admin_demo"))
+        result = await db.execute(select(User).filter(User.username == "admin_demo"))
         admin = result.scalar_one_or_none()
         if not admin:
             admin = User(
@@ -22,7 +25,7 @@ async def main():
             )
             db.add(admin)
         # customer
-        result = await db.execute(select(User).filter(User.username=="cust_demo"))
+        result = await db.execute(select(User).filter(User.username == "cust_demo"))
         cust = result.scalar_one_or_none()
         if not cust:
             cust = User(
@@ -37,6 +40,7 @@ async def main():
             db.add(cust)
         await db.commit()
     print("Seeded: admin_demo / cust_demo")
+
 
 if __name__ == "__main__":
     asyncio.run(main())

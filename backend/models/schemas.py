@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Optional
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr, Field, validator, field_validator
+from pydantic import BaseModel, EmailStr, Field, field_validator, validator
 
 from backend.config.constants import (
     DocumentType,
@@ -11,20 +11,21 @@ from backend.config.constants import (
     UserRole,
 )
 
-
 # ---------------------------------------------------------------------------
 # Document Schemas (DB → API)
 # ---------------------------------------------------------------------------
+
 
 class DocumentOut(BaseModel):
     """
     Generic document representation (e.g. for admin detail endpoints).
     """
+
     id: str
     filename: str
     file_path: str
     document_type: str  # exposed as plain string (enum .value)
-    uploaded_by: str    # user id as string
+    uploaded_by: str  # user id as string
     file_size: float
     is_processed: bool
     processed_at: Optional[datetime] = None
@@ -50,6 +51,7 @@ class DocumentUploadResponse(BaseModel):
     - document_id: string representation of the document UUID
     - filename: original filename
     """
+
     success: bool
     document_id: str
     filename: str
@@ -64,6 +66,7 @@ class Document(BaseModel):
     Lightweight Document schema based on ORM model.
     Used where you want to expose the document row itself.
     """
+
     id: str
     filename: str
     document_type: DocumentType
@@ -87,6 +90,7 @@ class Document(BaseModel):
 # ---------------------------------------------------------------------------
 # User Schemas
 # ---------------------------------------------------------------------------
+
 
 class UserBase(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
@@ -130,6 +134,7 @@ class User(UserBase):
 # Authentication Schemas
 # ---------------------------------------------------------------------------
 
+
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
@@ -147,6 +152,7 @@ class LoginRequest(BaseModel):
 # ---------------------------------------------------------------------------
 # Beneficiary Schemas
 # ---------------------------------------------------------------------------
+
 
 class BeneficiaryBase(BaseModel):
     name: str = Field(..., min_length=2, max_length=100)
@@ -179,6 +185,7 @@ class Beneficiary(BeneficiaryBase):
 # Transaction Schemas
 # ---------------------------------------------------------------------------
 
+
 class TransactionBase(BaseModel):
     amount: float = Field(..., gt=0)
     currency: str = Field(default="BHD", max_length=3)
@@ -208,6 +215,7 @@ class TransactionResponse(TransactionBase):
 # Balance and Account Schemas
 # ---------------------------------------------------------------------------
 
+
 class BalanceResponse(BaseModel):
     balance: float
     currency: str = "BHD"
@@ -219,16 +227,14 @@ class BalanceResponse(BaseModel):
 class AccountOperation(BaseModel):
     user_id: str  # Changed from UUID to str
     amount: float = Field(..., gt=0)
-    operation_type: str = Field(
-        ...,
-        pattern="^(credit|debit)$"
-    )
+    operation_type: str = Field(..., pattern="^(credit|debit)$")
     description: Optional[str] = None
 
 
 # ---------------------------------------------------------------------------
 # Mock API Responses
 # ---------------------------------------------------------------------------
+
 
 class MockApiResponse(BaseModel):
     success: bool
@@ -240,6 +246,7 @@ class MockApiResponse(BaseModel):
 # ---------------------------------------------------------------------------
 # Chat Schemas
 # ---------------------------------------------------------------------------
+
 
 class ChatMessage(BaseModel):
     content: str

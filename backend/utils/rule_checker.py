@@ -1,6 +1,7 @@
+from backend.config.constants import BLACKLISTED_COUNTRIES
 from backend.rag.rag_manager import RAGManager
 from backend.utils.mock_apis import mock_banking_api
-from backend.config.constants import BLACKLISTED_COUNTRIES
+
 
 class ComplianceRuleChecker:
     """Cross-checks RAG rules and sanctions before allowing transfers."""
@@ -11,7 +12,9 @@ class ComplianceRuleChecker:
     async def verify_transaction(self, user_id: str, user_input: str):
         """Validate against transfer limits and sanctions."""
         # Check against static blacklists
-        if any(country.lower() in user_input.lower() for country in BLACKLISTED_COUNTRIES):
+        if any(
+            country.lower() in user_input.lower() for country in BLACKLISTED_COUNTRIES
+        ):
             return False, "Destination country is blacklisted."
 
         # Retrieve rules from vector DB

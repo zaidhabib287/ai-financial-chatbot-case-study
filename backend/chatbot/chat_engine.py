@@ -1,13 +1,14 @@
-from typing import Dict, Any, Optional
+from typing import Any, Dict, Optional
 from uuid import uuid4
+
 from langchain import LLMChain
-from langchain.prompts import PromptTemplate
 from langchain.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
+from langchain.prompts import PromptTemplate
 
 from backend.config.settings import settings
-from backend.utils.intent_classifier import IntentClassifier
 from backend.utils.chat_context import ChatContextManager
+from backend.utils.intent_classifier import IntentClassifier
 from backend.utils.rule_checker import ComplianceRuleChecker
 
 
@@ -20,7 +21,9 @@ class ChatEngine:
             temperature=0.2,
             openai_api_key=settings.openai_api_key,
         )
-        self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+        self.memory = ConversationBufferMemory(
+            memory_key="chat_history", return_messages=True
+        )
         self.intent_classifier = IntentClassifier()
         self.context_manager = ChatContextManager()
         self.rule_checker = ComplianceRuleChecker()
@@ -59,7 +62,9 @@ class ChatEngine:
             }
 
         elif intent == "transfer_funds":
-            compliance_ok, msg = await self.rule_checker.verify_transaction(user_id, user_input)
+            compliance_ok, msg = await self.rule_checker.verify_transaction(
+                user_id, user_input
+            )
             if not compliance_ok:
                 return {
                     "response": f"Transfer blocked – {msg}",

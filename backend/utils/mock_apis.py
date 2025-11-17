@@ -43,7 +43,7 @@ class MockBankingAPI:
 
         # Generate random balance for testing
         balance = round(random.uniform(100, 10000), 2)
-        
+
         return MockApiResponse(
             success=True,
             message="Balance retrieved successfully",

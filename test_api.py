@@ -1,5 +1,6 @@
-import requests
 import json
+
+import requests
 
 # Test root endpoint
 response = requests.get("http://localhost:8000/")

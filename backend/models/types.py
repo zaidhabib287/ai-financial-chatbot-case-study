@@ -1,7 +1,9 @@
 # backend/models/types.py
 import uuid
-from sqlalchemy.types import TypeDecorator, CHAR
+
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
+from sqlalchemy.types import CHAR, TypeDecorator
+
 
 class GUID(TypeDecorator):
     """Platform-independent GUID/UUID type.
@@ -9,6 +11,7 @@ class GUID(TypeDecorator):
     - On Postgres: uses native UUID
     - On SQLite/others: stores as CHAR(36)
     """
+
     impl = CHAR
     cache_ok = True
 

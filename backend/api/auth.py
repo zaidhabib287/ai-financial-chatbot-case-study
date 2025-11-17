@@ -6,11 +6,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
 from backend.auth.dependencies import get_current_user
-from backend.auth.security import create_access_token, get_password_hash, verify_password
+from backend.auth.security import (
+    create_access_token,
+    get_password_hash,
+    verify_password,
+)
 from backend.config.settings import settings
 from backend.models.database import get_db
 from backend.models.models import User
-from backend.models.schemas import Token, User as UserSchema, UserCreate
+from backend.models.schemas import Token
+from backend.models.schemas import User as UserSchema
+from backend.models.schemas import UserCreate
 
 router = APIRouter()
 

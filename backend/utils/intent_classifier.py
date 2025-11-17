@@ -1,5 +1,7 @@
 import re
+
 from backend.config.constants import CHAT_INTENTS
+
 
 class IntentClassifier:
     """Simple rule-based intent classifier."""
