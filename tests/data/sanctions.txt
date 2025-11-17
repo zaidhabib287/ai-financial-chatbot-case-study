@@ -1,0 +1,2 @@
+Sanctioned countries: North Korea, Iran, Syria
+Sanctioned entities: test_sanctioned_person, blocked_entity

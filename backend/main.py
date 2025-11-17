@@ -5,12 +5,10 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
+from backend.api import admin, auth, beneficiaries, mock, transactions, users, chatbot
 from backend.config.logger import logger
 from backend.config.settings import settings
 from backend.models.database import Base, engine
-
-# Import routers (to be created in next phases)
-# from backend.api import auth, users, beneficiaries, transactions, admin, chat
 
 
 @asynccontextmanager
@@ -82,37 +80,42 @@ async def health_check():
     }
 
 
-# Include routers (uncomment as they are created)
-# app.include_router(
-#     auth.router,
-#     prefix=f"{settings.api_prefix}/auth",
-#     tags=["Authentication"]
-# )
-# app.include_router(
-#     users.router,
-#     prefix=f"{settings.api_prefix}/users",
-#     tags=["Users"]
-# )
-# app.include_router(
-#     beneficiaries.router,
-#     prefix=f"{settings.api_prefix}/beneficiaries",
-#     tags=["Beneficiaries"]
-# )
-# app.include_router(
-#     transactions.router,
-#     prefix=f"{settings.api_prefix}/transactions",
-#     tags=["Transactions"]
-# )
-# app.include_router(
-#     admin.router,
-#     prefix=f"{settings.api_prefix}/admin",
-#     tags=["Admin"]
-# )
-# app.include_router(
-#     chat.router,
-#     prefix=f"{settings.api_prefix}/chat",
-#     tags=["Chat"]
-# )
+# Include routers
+app.include_router(
+    auth.router,
+    prefix=f"{settings.api_prefix}/auth",
+    tags=["Authentication"],
+)
+app.include_router(
+    users.router,
+    prefix=f"{settings.api_prefix}/users",
+    tags=["Users"],
+)
+app.include_router(
+    beneficiaries.router,
+    prefix=f"{settings.api_prefix}/beneficiaries",
+    tags=["Beneficiaries"],
+)
+app.include_router(
+    transactions.router,
+    prefix=f"{settings.api_prefix}/transactions",
+    tags=["Transactions"],
+)
+app.include_router(
+    admin.router,
+    prefix=f"{settings.api_prefix}/admin",
+    tags=["Admin"],
+)
+app.include_router(
+    mock.router,
+    prefix=f"{settings.api_prefix}/mock",
+    tags=["Mock APIs"],
+)
+app.include_router(
+    chatbot.router,
+    prefix=f"{settings.api_prefix}/chatbot",
+    tags=["Chatbot"],
+)
 
 
 # Global exception handler

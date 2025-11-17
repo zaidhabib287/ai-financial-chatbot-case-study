@@ -1,0 +1,26 @@
+OFFICIAL SANCTIONS LIST
+Effective Date: November 1, 2024
+
+SANCTIONED COUNTRIES:
+The following countries are subject to comprehensive sanctions:
+1. North Korea (Democratic People's Republic of Korea)
+2. Iran (Islamic Republic of Iran)
+3. Syria (Syrian Arab Republic)
+4. Cuba (Republic of Cuba)
+5. Crimea Region of Ukraine
+
+SANCTIONED ENTITIES AND INDIVIDUALS:
+The following entities and individuals are prohibited from conducting business:
+
+ENTITIES:
+- ABC Trading Company Ltd. (Hong Kong)
+- XYZ International Holdings (Panama)
+- Global Finance Corp (Cayman Islands)
+- Test Sanctioned Company (Testing)
+
+INDIVIDUALS:
+- John Doe (DOB: 01/01/1970, Passport: X1234567)
+- Jane Smith (DOB: 15/03/1975, Passport: Y9876543)
+- Test Sanctioned Person (DOB: 01/01/1980, Passport: TEST123)
+
+All financial institutions must screen transactions against this list.

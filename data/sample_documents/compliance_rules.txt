@@ -1,0 +1,29 @@
+FINANCIAL COMPLIANCE RULES
+Version 2.0 - Effective January 1, 2024
+
+TRANSACTION LIMITS:
+
+1. Individual Customer Limits:
+   - Daily transfer limit: 1000 BHD (Bahraini Dinars)
+   - Per transaction limit: 500 BHD
+   - Monthly transfer limit: 20000 BHD
+
+2. Corporate Customer Limits:
+   - Daily transfer limit: 50000 BHD
+   - Per transaction limit: 10000 BHD
+   - Monthly transfer limit: 500000 BHD
+
+3. Enhanced Due Diligence Requirements:
+   - Transactions over 100 BHD require identity verification
+   - Transactions over 500 BHD require source of funds documentation
+   - Transactions over 1000 BHD require management approval
+
+4. Restricted Activities:
+   - Cash transactions over 5000 BHD are prohibited
+   - Third-party transfers require written authorization
+   - International transfers require sanctions screening
+
+5. Reporting Requirements:
+   - All suspicious transactions must be reported within 24 hours
+   - Daily transaction reports must be submitted to compliance
+   - Monthly compliance summaries required for audit
