@@ -27,16 +27,20 @@ class Settings(BaseSettings):
     algorithm: str = Field(default="HS256")
     access_token_expire_minutes: int = Field(default=30)
 
-    # OpenAI
+    # LLM / Ollama config
+    ollama_base_url: str = Field(default="http://localhost:11434")
+    ollama_model: str = "gemma3:4b"
+
+    # OpenAI (optional)
     openai_api_key: Optional[str] = Field(default=None)
 
-    # Vector Database
+    # Vector DB
     vector_db_path: str = Field(default="./data/vectordb")
     embedding_model: str = Field(default="sentence-transformers/all-MiniLM-L6-v2")
 
     # File Upload
     upload_dir: str = Field(default="./data/uploads")
-    max_upload_size: int = Field(default=10485760)  # 10MB
+    max_upload_size: int = Field(default=10485760)
 
     # Mock API
     mock_api_delay: float = Field(default=0.5)
@@ -56,7 +60,6 @@ class Settings(BaseSettings):
     @validator("database_url", pre=True)
     def build_database_url(cls, v: str, values: Dict[str, Any]) -> str:
         if v.startswith("sqlite"):
-            # Ensure directory exists for SQLite
             Path("./data").mkdir(exist_ok=True)
         return v
 
@@ -74,5 +77,5 @@ class Settings(BaseSettings):
         case_sensitive = False
 
 
-# Create singleton instance
+# Singleton
 settings = Settings()
