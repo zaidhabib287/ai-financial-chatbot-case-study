@@ -34,7 +34,7 @@ A secure, rule-driven chatbot system for fund transfers and beneficiary manageme
 
 | File | Description |
 |-------------------------|----------------------|
-| `solution_summary.md` | Full case study solution |
+| `docs/solution_summary.md` | Full case study solution |
 | `docs/setup.md` | Setup instructions |
 | `docs/architecture/system-design.md` | Architecture blueprint |
 
@@ -61,12 +61,6 @@ Start Chat UI:
 cd frontend/chatbot-ui
 streamlit run app.py
 ```
-
----
-
-## 📬 Contact
-
-For queries, improvements, and production deployment discussions, feel free to reach out.
 
 ---
 
